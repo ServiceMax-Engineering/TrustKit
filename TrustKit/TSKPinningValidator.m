@@ -85,6 +85,11 @@
 {
     TSKTrustDecision finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
     
+    if (!self.enforcePinning)
+    {
+        TSKLog(@"Pin validation success - pinning not enforced %@", serverHostname);
+        return TSKTrustDecisionDomainNotPinned;
+    }
     if ((serverTrust == NULL) || (serverHostname == nil))
     {
         TSKLog(@"Pin validation error - invalid parameters for %@", serverHostname);
@@ -186,6 +191,11 @@
     }
     CFRelease(serverTrust);
     
+//    if (self.enforcePinning && finalTrustDecision == TSKTrustDecisionDomainNotPinned)
+//    {
+//        TSKLog(@"Pin validation error - not pinned %@", serverHostname);
+//        finalTrustDecision = TSKTrustDecisionShouldBlockConnection;
+//    }
     return finalTrustDecision;
 }
 

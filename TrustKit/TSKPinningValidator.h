@@ -36,6 +36,8 @@
  */
 @interface TSKPinningValidator : NSObject
 
+@property (readwrite, nonatomic) BOOL enforcePinning; // Not part of the HPKP spec
+
 #pragma mark High-level Validation Method
 
 /**
